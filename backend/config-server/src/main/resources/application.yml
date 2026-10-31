@@ -1,0 +1,20 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/configs, file:./config-repo
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true

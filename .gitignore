@@ -1,0 +1,30 @@
+# Maven build outputs & target directories
+**/target/
+**/pom.xml.tag
+**/pom.xml.releaseBackup
+**/pom.xml.versionsBackup
+**/pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties
+
+# IDE specific files (IntelliJ IDEA & Eclipse)
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+.sts4-cache/
+
+# OS and log files
+.DS_Store
+Thumbs.db
+*.log
+logs/
+
+# Local databases or docker volumes if stored locally
+data/

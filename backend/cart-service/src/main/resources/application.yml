@@ -6,6 +6,6 @@ spring:
     name: cart-service
   data:
     redis:
-      host: ${REDIS_HOST:localhost}
+      host: ${REDIS_HOST:redis-cache}
       port: ${REDIS_PORT:6379}
       timeout: 60000

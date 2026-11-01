@@ -283,7 +283,7 @@ services:
       - kafka
     environment:
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
-      - SPRING_KAFKA_BOOTSTR_SERVERS=kafka:29092
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092
     networks:
       - ecommerce-net
 
@@ -356,5 +356,22 @@ services:
       - eureka-server
     environment:
       - EUREKA_SERVER_URL=http://eureka-server:8761/eureka/
+    networks:
+      - ecommerce-net
+
+  # ==========================================
+  # MODERN FRONTEND SERVICE
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-app
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8080/api
+    depends_on:
+      - api-gateway
     networks:
       - ecommerce-net

@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import ProductCatalog from './pages/ProductCatalog';
 import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import OrdersPage from './pages/OrdersPage';
 
 const ProtectedRoute = ({ children }) => {
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/products" element={<ProductCatalog />} />
                         <Route path="/cart" element={<CartPage />} />
                         <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
                         <Route
                             path="/orders"
                             element={

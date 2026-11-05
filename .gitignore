@@ -10,6 +10,12 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.properties
 
+# Frontend / Node modules
+node_modules/
+dist/
+build/
+.env
+
 # IDE specific files (IntelliJ IDEA & Eclipse)
 .idea/
 *.iml

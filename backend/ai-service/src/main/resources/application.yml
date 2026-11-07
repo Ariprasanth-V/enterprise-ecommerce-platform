@@ -6,8 +6,7 @@ spring:
     name: ai-service
 
 gemini:
-  api:
-    key: ${GEMINI_API_KEY}
+  api-key: ${GEMINI_API_KEY}
 
 eureka:
   client:

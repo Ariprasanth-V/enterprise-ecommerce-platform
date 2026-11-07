@@ -16,6 +16,11 @@ spring:
           predicates:
             - Path=/api/v1/products/**
 
+        - id: ai-service-route
+          uri: lb://ai-service
+          predicates:
+            - Path=/ai/**
+
         - id: cart-service-route
           uri: lb://cart-service
           predicates:

@@ -9,6 +9,7 @@ import CartPage from './pages/CartPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import OrdersPage from './pages/OrdersPage';
+import AIAssistant from './components/AIAssistant'; // <--- Import AI Assistant
 
 const ProtectedRoute = ({ children }) => {
     const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -18,7 +19,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
     return (
         <Router>
-            <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+            <div className="min-h-screen flex flex-col bg-gray-50 text-gray-900 relative">
                 <Navbar />
                 <main className="flex-grow container mx-auto px-4 py-8">
                     <Routes>
@@ -38,6 +39,7 @@ function App() {
                     </Routes>
                 </main>
                 <Footer />
+                <AIAssistant /> {/* <--- Renders floating assistant widget globally */}
             </div>
         </Router>
     );

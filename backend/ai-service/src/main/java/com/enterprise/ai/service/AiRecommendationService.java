@@ -2,8 +2,11 @@ package com.enterprise.ai.service;
 
 import com.enterprise.ai.dto.RecommendationRequest;
 import com.enterprise.ai.dto.RecommendationResponse;
+import com.google.genai.Client;
+import com.google.genai.types.GenerateContentResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +15,40 @@ import java.util.List;
 public class AiRecommendationService {
 
     private static final Logger log = LoggerFactory.getLogger(AiRecommendationService.class);
+    private final Client client;
+
+    public AiRecommendationService(@Value("${gemini.api.key}") String apiKey) {
+        this.client = new Client.Builder().apiKey(apiKey).build();
+    }
 
     public RecommendationResponse getRecommendations(RecommendationRequest request) {
         log.info("Generating AI recommendations for customer ID: {} based on context: {}",
                 request.customerId(), request.searchContext());
 
-        // Simulated AI inference output or integration point for LLM / Vector DB embeddings
-        List<String> suggestedSkus = List.of("SKU-PROD-001", "SKU-PROD-004", "SKU-PROD-009");
+        try {
+            String prompt = String.format(
+                    "You are an expert e-commerce recommendation engine. A user (ID: %d) is searching with context: \"%s\". " +
+                            "Provide a friendly shopping response message and suggest relevant product SKUs.",
+                    request.customerId(), request.searchContext()
+            );
 
-        String message = "Based on your recent browsing history and preferences, here are top picks tailored for you!";
+            GenerateContentResponse response = client.models.generateContent(
+                    "gemini-2.5-flash",
+                    prompt,
+                    null
+            );
 
-        return new RecommendationResponse(message, suggestedSkus);
+            String aiMessage = response.text();
+            List<String> suggestedSkus = List.of("SKU-PROD-001", "SKU-PROD-004"); // Can be parsed dynamically from response
+
+            return new RecommendationResponse(aiMessage, suggestedSkus);
+
+        } catch (Exception e) {
+            log.error("Failed to generate Gemini AI recommendations", e);
+            return new RecommendationResponse(
+                    "Hello! I am having trouble connecting to my AI core right now, but feel free to browse our catalog.",
+                    List.of()
+            );
+        }
     }
 }

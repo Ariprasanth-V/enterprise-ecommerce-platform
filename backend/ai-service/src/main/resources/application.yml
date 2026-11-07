@@ -7,7 +7,7 @@ spring:
 
 gemini:
   api:
-    key: ${GEMINI_API_KEY:AQ.Ab8RN6Kc3QyGq-L-C7tx4aSG2LQOoarsp5JTbYL0zznI_EM2pw}
+    key: ${GEMINI_API_KEY}
 
 eureka:
   client:
